@@ -1,4 +1,6 @@
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -35,6 +37,7 @@ public class gameBlackjack {
         int status = 0;
         do{
             currentGame(playerL, ply);
+            highscore(playerL);
             System.out.println("Do you want to play another game?\n1.Yes\n2.No\n-----");
             status = sc.nextInt();
             for (int i=0; i<playerL.size(); ++i){
@@ -100,5 +103,12 @@ public class gameBlackjack {
         playerList.get(num).getC().add(deck.get(dealme));
         playerList.get(num).setTotal();
         deck.remove(dealme);
+    }
+
+    private void highscore(ArrayList<players> playerL){
+        System.out.println("sorting");
+        Collections.sort(playerL, new HighScoreComaparator());
+        System.out.println("Scores");
+        System.out.println(playerL);
     }
 }
